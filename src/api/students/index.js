@@ -4,4 +4,9 @@ const controller = require('./controller')
 
 router.get('/', controller.index)
 router.get('/create', controller.create)
+router.put('/update', controller.update)
+
+// Save attendance
+router.post('/set-attendance', controller.setAttendance)
+
 module.exports = router

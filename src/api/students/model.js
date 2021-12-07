@@ -14,6 +14,7 @@ class Student extends Model {
    */
   static associate(models) {
     Student.hasOne(models.Users)
+    Student.hasOne(models.Student_attendance)
   }
 };
 
@@ -28,4 +29,13 @@ Student.init({
   modelName: 'Student',
 });
 
+Student.prototype.template = (student) => {
+  return {
+    first_name: Student.first_name,
+    last_name: Student.last_name,
+    code: Student.code,
+    address: Student.address,
+    phone_number: Student.phone_number
+  }
+}
 module.exports = Student

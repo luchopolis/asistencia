@@ -8,4 +8,5 @@ const generateCode = () => {
     return code
 }
 
-module.exports = { generateCode }
+const convertToBoolean = (value) => (value == 0) ? false : true
+module.exports = { generateCode, convertToBoolean }
