@@ -6,6 +6,8 @@ const sequelize = connect.connect()
 const {
   Model
 } = require('sequelize');
+const Student = require('../students/model');
+const User = require('../users/model');
 
 class UserStudents extends Model {
     /**
@@ -15,7 +17,7 @@ class UserStudents extends Model {
      */
     static associate(models) {
       // define association here
-      UserStudents.belongsTo(models.Student, { constraints: true, foreignKey: 'student_id'})
+      
     }
 };
 
@@ -26,5 +28,9 @@ UserStudents.init({
     sequelize,
     modelName: 'UserStudents',
 });
+
+
+UserStudents.belongsTo(User,{ foreignKey: 'user_id'})
+//UserStudents.belongsTo(User, { foreignKey: 'user_id'})
 
 module.exports = UserStudents

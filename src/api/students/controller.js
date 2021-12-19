@@ -25,12 +25,21 @@ const infoStudent = async (req, res, next) => {
     const { id } = req.params
     
     try {
-        const student = await Student.findOne({ where: { id: id }})
-        
+        const student = await Student.findOne({ where: { id: id }, include: [
+            { 
+                model: UserStudents,
+                attributes: ['id'],
+                include: 
+                [ 
+                    { model: User, attributes: ['id','username','isActive','createdAt'] }  
+                ]
+            }
+        ]})
+       
         if(!student){
             notFound(res)
         }else{
-            const value = student.template(student)
+            const value = student.template(student, true, 'UserStudent.User')
             success(res,value)
         }
 
