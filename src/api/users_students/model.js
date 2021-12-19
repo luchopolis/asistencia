@@ -15,6 +15,7 @@ class UserStudents extends Model {
      */
     static associate(models) {
       // define association here
+      UserStudents.belongsTo(models.Student, { constraints: true, foreignKey: 'student_id'})
     }
 };
 

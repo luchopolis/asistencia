@@ -6,6 +6,9 @@ router.get('/', controller.index)
 router.get('/create', controller.create)
 router.put('/update', controller.update)
 
+// Student individual data
+router.get('/:id', controller.infoStudent)
+
 // Save attendance
 router.post('/set-attendance', controller.setAttendance)
 

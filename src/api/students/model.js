@@ -13,7 +13,7 @@ class Student extends Model {
    * The `models/index` file will call this method automatically.
    */
   static associate(models) {
-    Student.hasOne(models.Users)
+    Student.hasOne(models.UserStudents, { foreignKey: 'student_id', constraints: true})
     Student.hasOne(models.Student_attendance)
   }
 };
@@ -30,12 +30,13 @@ Student.init({
 });
 
 Student.prototype.template = (student) => {
+  console.log(student.getUserStudents())
   return {
-    first_name: Student.first_name,
-    last_name: Student.last_name,
-    code: Student.code,
-    address: Student.address,
-    phone_number: Student.phone_number
+    first_name: student.first_name,
+    last_name: student.last_name,
+    code: student.code,
+    address: student.address,
+    phone_number: student.phone_number
   }
 }
 module.exports = Student

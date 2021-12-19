@@ -5,6 +5,9 @@ const Student_attendance = require('../students_attendance/model')
 const { generateCode } = require('../../utils/index')
 
 
+// UTILS
+const { notFound, success } = require('../../utils/response')
+
 const index = async (req, res, next) => {
     try {
         const getAll = await Student.findAll({})
@@ -12,7 +15,29 @@ const index = async (req, res, next) => {
     } catch (error) {
         if (error) {
             res.status(500).json({
-                error: error.stack
+                error: error.message
+            })
+        }
+    }
+}
+
+const infoStudent = async (req, res, next) => {
+    const { id } = req.params
+    
+    try {
+        const student = await Student.findOne({ where: { id: id }})
+        
+        if(!student){
+            notFound(res)
+        }else{
+            const value = student.template(student)
+            success(res,value)
+        }
+
+    } catch (error) {
+        if(error){
+            res.status(500).json({
+                error: error.message
             })
         }
     }
@@ -27,7 +52,7 @@ const _checkIfCodeExist = async (code) => {
         }
         return false
     } catch (error) {
-        if (error) throw new Error(error.stack)
+        if (error) throw new Error(error.message)
     }
 }
 
@@ -94,7 +119,7 @@ const update = async (req, res, next) => {
     } catch (error) {
         console.log(error.stack)
         res.status(400).json({
-            msg: error
+            msg: error.message
         })
     }
     
@@ -124,4 +149,4 @@ const setAttendance = async (req, res, next) => {
 
 
 
-module.exports = { index, create, update, setAttendance }
+module.exports = { index, create, update, setAttendance, infoStudent }
