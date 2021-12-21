@@ -1,5 +1,8 @@
 const User = require('../users/model')
 
+//JWT
+const { sign } = require('../../utils/jwt')
+
 const simpleAuth = async (req, res, next) => {
     const { username, password } = req.body
     
@@ -16,7 +19,6 @@ const simpleAuth = async (req, res, next) => {
             })
         }
     }
-    
 }
 
 const _findUser = async ({ username, password }) => {
@@ -28,8 +30,14 @@ const _findUser = async ({ username, password }) => {
                 user: 'This account was disable'
             }
         }
+        const payload = {
+            username: user.username,
+            createdAt: user.createdAt
+        }
+        const token = await sign(payload,'1h')
         return {
-            user: user
+            user: user,
+            token: token
         }
     }else {
         return {
