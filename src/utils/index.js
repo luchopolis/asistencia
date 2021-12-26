@@ -1,4 +1,6 @@
 const institution_initials = 'CSLH'
+const randomstring = require('randomstring')
+const randomLenght = 6
 
 
 const generateCode = () => {
@@ -9,4 +11,10 @@ const generateCode = () => {
 }
 
 const convertToBoolean = (value) => (value == 0) ? false : true
-module.exports = { generateCode, convertToBoolean }
+
+const generateRegisterCode = () => {
+    const code = randomstring.generate(randomLenght)
+    return code
+}
+
+module.exports = { generateCode, convertToBoolean, generateRegisterCode }

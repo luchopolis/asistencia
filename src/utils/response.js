@@ -8,4 +8,10 @@ const success = (res, data = {}, status = 200) => {
     res.status(status).json(data)
 }
 
-module.exports = { notFound, success }
+const errorResponse = (res, status = 500, error) => {
+    res.status(status).json({
+        msg: error
+    })
+}
+
+module.exports = { notFound, success, errorResponse }
