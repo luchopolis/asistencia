@@ -17,4 +17,18 @@ const generateRegisterCode = () => {
     return code
 }
 
-module.exports = { generateCode, convertToBoolean, generateRegisterCode }
+/*
+* @param {Date} expiration
+*/
+const codeExpiration = (expiration) => {
+    const today = new Date().getHours()
+    const codeDate = new Date(expiration)
+    console.log(codeDate);
+ 
+    if(codeDate.getHours() > today ){
+        return { expired: false }
+    }
+    return { expired: true } // the code expired
+}
+
+module.exports = { generateCode, convertToBoolean, generateRegisterCode, codeExpiration }

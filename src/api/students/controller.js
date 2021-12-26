@@ -2,11 +2,14 @@ const Student = require('./model')
 const User = require('../users/model')
 const UserStudents = require('../users_students/model')
 const Student_attendance = require('../students_attendance/model')
-const { generateCode } = require('../../utils/index')
 
+
+// Model external
+const RegisterCode = require('../registerCodes/registercodes')
 
 // UTILS
 const { notFound, success } = require('../../utils/response')
+const { generateCode, codeExpiration } = require('../../utils/index')
 
 const index = async (req, res, next) => {
     try {
@@ -76,8 +79,24 @@ const _getCode = () => {
 }
 
 const create = async (req, res, next) => {
-    const { first_name, last_name, address, phone_number } = req.body
+    const { first_name, last_name, address, phone_number, codeRegister } = req.body
     try {
+        if(!codeRegister){
+            success(res, { msg: 'codeRegister required' })
+            return
+        }
+
+        // getCode
+        const expiration = await RegisterCode.findOne({ where: { code: codeRegister } })
+        if(!expiration){
+            notFound(res,"Code Not Found")
+            return
+        }
+        if(codeExpiration(expiration.expiration).expired){
+            res.status(401).json({ msg: 'Code Expired'})
+            return
+        }
+        
         const randomCode = _getCode()
         const student = Student.build({
             first_name: first_name,

@@ -1,6 +1,6 @@
-const notFound = (res, status = 404) => {
+const notFound = (res, msg, status = 404) => {
     res.status(status).json({
-        msg: 'Resource Not Found'
+        msg: msg || 'Resource Not Found'
     })
 }
 

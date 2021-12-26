@@ -35,8 +35,5 @@ const _checkIfCodeExists = async (code) => {
     }
 }
 
-const verifyCode = async (req, res) => {
-
-}
 
 module.exports = { createCode }
