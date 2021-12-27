@@ -16,7 +16,7 @@ module.exports = {
       student_id: 1,
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);s
+    }]);
   },
 
   down: async (queryInterface, Sequelize) => {

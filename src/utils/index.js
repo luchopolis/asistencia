@@ -1,12 +1,14 @@
 const institution_initials = 'CSLH'
+const teacher_initials = 'TEACH'
 const randomstring = require('randomstring')
 const randomLenght = 6
 
 
-const generateCode = () => {
+const generateCode = (teacher = false) => {
     const sufix = (new Date().getFullYear()).toString().slice(2)
     const getRandom = (Math.floor(Math.random() * (9999 - 0)) + 0).toString().padStart(4,'0');
-    const code = institution_initials + getRandom + sufix
+    const prefi = (teacher) ? teacher_initials : institution_initials
+    const code = prefi + getRandom + sufix
     return code
 }
 

@@ -7,7 +7,7 @@ const connect = require('../../services/sequelize/index')
 const { DataTypes } = require('sequelize'); 
 const sequelize = connect.connect()
 
-class UserTeachers extends Model {
+class Roles extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
@@ -18,13 +18,12 @@ class UserTeachers extends Model {
   }
 };
 
-
-UserTeachers.init({
-  user_id: DataTypes.INTEGER,
-  teacher_id: DataTypes.INTEGER
+Roles.init({
+  role: DataTypes.STRING
 }, {
   sequelize,
-  modelName: 'UserTeachers',
+  modelName: 'roles',
 });
 
-module.exports = UserTeachers
+
+module.exports = Roles

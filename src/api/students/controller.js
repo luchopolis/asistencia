@@ -3,6 +3,7 @@ const User = require('../users/model')
 const UserStudents = require('../users_students/model')
 const Student_attendance = require('../students_attendance/model')
 
+const rolesValues = require('../roles/values')
 
 // Model external
 const RegisterCode = require('../registerCodes/registercodes')
@@ -108,7 +109,7 @@ const create = async (req, res, next) => {
 
         const studentCreated = await student.save()
         // Create the user for the student
-        const user = User.build({ username: randomCode })
+        const user = User.build({ username: randomCode, role_id: rolesValues.student })
         const studentUser = await user.save()
         // create the relation
         const userStudent = UserStudents.build({ user_id: studentUser.getDataValue('id'), student_id: studentCreated.getDataValue('id') })

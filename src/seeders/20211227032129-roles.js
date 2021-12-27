@@ -11,11 +11,19 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('Users', [{
-      username: 'CE0002',
-      password: '123456',
-      role_id: 1,
-      isActive: true,
+     return queryInterface.bulkInsert('Roles', [
+    {
+      role: 'admin',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      role: 'student',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      role: 'teacher',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
@@ -28,6 +36,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-      return queryInterface.bulkDelete('Users', null, {})
+     return queryInterface.bulkDelete('Roles', null, {});
   }
 };

@@ -22,6 +22,7 @@ User.init({
     type: DataTypes.STRING,
     defaultValue: defaultPassword
   },
+  role_id: DataTypes.INTEGER,
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
