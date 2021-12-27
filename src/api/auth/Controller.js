@@ -22,7 +22,7 @@ const simpleAuth = async (req, res, next) => {
 }
 
 const _findUser = async ({ username, password }) => {
-    const user = await User.findOne({ where: { username: username, password: password, isActive: true }, attributes: ['id','username','isActive','createdAt']})
+    const user = await User.findOne({ where: { username: username, password: password, isActive: true }, attributes: ['id','username','isActive','role_id','createdAt']})
 
     if(user != null){
         if(user.isActive == false){
@@ -32,6 +32,7 @@ const _findUser = async ({ username, password }) => {
         }
         const payload = {
             username: user.username,
+            role: user.role_id,
             createdAt: user.createdAt
         }
         const token = await sign(payload,'1h')

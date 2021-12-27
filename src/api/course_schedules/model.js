@@ -2,12 +2,11 @@
 const {
   Model
 } = require('sequelize');
-
 const connect = require('../../services/sequelize/index')
 const { DataTypes } = require('sequelize'); 
 const sequelize = connect.connect()
 
-class Groups extends Model {
+class CourseSchedule extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
@@ -18,14 +17,16 @@ class Groups extends Model {
   }
 };
 
-Groups.init({
-  name: DataTypes.STRING,
-  period_id: DataTypes.INTEGER,
-  course_id: DataTypes.INTEGER,
-  teacher_id: DataTypes.INTEGER
+CourseSchedule.init({
+  group_id: DataTypes.INTEGER,
+  Monday: DataTypes.BOOLEAN,
+  Tuesday: DataTypes.BOOLEAN,
+  Wednesday: DataTypes.BOOLEAN,
+  Thursday: DataTypes.BOOLEAN,
+  Friday: DataTypes.BOOLEAN
 }, {
   sequelize,
-  modelName: 'Groups',
+  modelName: 'CourseSchedule',
 });
 
-module.exports = Groups
+module.exports = CourseSchedule
